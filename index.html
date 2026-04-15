@@ -32,35 +32,45 @@
             box-shadow: 0 10px 25px rgba(0,0,0,0.05);
         }
 
-        /* 헤더 섹션 - 글자 잘림 방지 수정 */
+        /* [수정] 헤더 레이아웃: 글자 깨짐 방지 */
         header {
             display: flex;
             justify-content: space-between;
-            align-items: center;
+            align-items: flex-end; /* 하단 라인에 맞춤 */
             margin-bottom: 30px;
             padding-bottom: 15px;
             border-bottom: 2px solid #1a1a1a;
+            flex-wrap: wrap; /* 모바일에서 자동 줄바꿈 */
+            gap: 20px;
         }
 
-        .title-area { display: flex; align-items: center; gap: 12px; }
+        .title-area { 
+            display: flex; 
+            align-items: center; 
+            gap: 12px;
+            flex-shrink: 0; /* 제목이 찌그러지지 않게 방지 */
+        }
         .logo-box { font-weight: 900; color: #fff; background: #2c5fb3; padding: 2px 8px; border-radius: 2px; font-size: 14px; }
-        .main-title { font-size: 28px; font-weight: 800; letter-spacing: -1px; }
+        .main-title { font-size: 28px; font-weight: 800; letter-spacing: -1px; white-space: nowrap; }
 
-        .header-info { display: flex; gap: 20px; }
+        .header-info { 
+            display: flex; 
+            gap: 20px; 
+            flex-shrink: 0;
+        }
         .info-group { display: flex; align-items: center; gap: 8px; }
         .info-group label { font-size: 14px; font-weight: 600; color: #444; white-space: nowrap; }
         
-        /* [수정] 입력란 폰트 하단 공간 확보 */
         .info-group input {
             border: none;
             border-bottom: 1px solid #cbd5e1;
             width: 140px;
-            padding: 6px 2px 4px 2px; /* 하단 패딩을 주어 글자 잘림 방지 */
+            padding: 6px 2px 4px 2px;
             font-size: 15px;
             font-family: 'Pretendard', sans-serif;
             outline: none;
             text-align: center;
-            line-height: 1.4; /* 줄 높이 확보 */
+            line-height: 1.4;
             background: transparent;
         }
 
@@ -162,9 +172,24 @@
         }
         #result-preview img { width: 100%; border: 1px solid #ddd; border-radius: 8px; margin-top: 15px; }
 
+        /* [수정] 스마트폰 화면 최적화 미디어 쿼리 */
         @media (max-width: 600px) {
-            .container { padding: 25px 20px; }
-            .header-info { flex-direction: column; align-items: flex-end; gap: 10px; }
+            .container { padding: 30px 20px; }
+            header { 
+                flex-direction: column; 
+                align-items: flex-start; /* 왼쪽 정렬 */
+                gap: 15px;
+            }
+            .title-area { width: 100%; }
+            .header-info { 
+                width: 100%; 
+                flex-direction: column; 
+                gap: 10px; 
+                align-items: flex-start;
+            }
+            .info-group { width: 100%; }
+            .info-group input { width: 100%; text-align: left; }
+            
             .character-card { flex-direction: column; }
             .grid-2 { grid-template-columns: 1fr; }
         }
